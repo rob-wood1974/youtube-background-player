@@ -1,0 +1,231 @@
+body {
+    background-color: #34495e;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #6d6d6d;
+}
+
+p {
+    color: #6d6d6d;
+}
+
+/*heading border*/
+
+.m-heading-border {
+    background-color: #62b7a4;
+}
+
+/* SPLASH IMAGE */
+
+.m-splash-image {
+    color: #fff;
+}
+
+.m-splash-image p {
+    color: #fff;
+}
+
+.m-splash-image h1 {
+    color: #fff;
+}
+
+/* read more button in splash image*/
+
+.m-splash-image a {
+    color: #fff;
+}
+
+/*navigation*/
+
+.l-navigation-wrap {
+    background-color: #34495e;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.paralax-section1 h1, .paralax-section1 h2, .paralax-section1 h3, .paralax-section1 h4, .paralax-section1 h5, .paralax-section1 h6,  {
+    color: #f1c40f;
+}
+
+.l-paralax-section, .l-paralax-section p {
+    color: #fff;
+}
+
+.what-we-do-section h6 {
+    color: #fff;
+}
+
+.what-we-do-section h4 {
+    color: #65a3b2;
+}
+
+/* News content */
+
+.news-content h6 a {
+    color: #454545;    
+}
+
+.news-content h6 a:hover {    
+    color: #1abc9c;    
+}
+
+.news-button {
+    background-color: #1abc9c;
+    border: 1px solid #1abc9c;
+    color: #fff;
+}
+
+.news-button:hover {
+    background-color: transparent;
+    color: #1abc9c;    
+}
+
+.image-hover .categories a, .image-hover .categories {
+    color: #fff;
+}
+
+.categories .m-heading-border {
+    background-color: #fff;
+}
+
+.post-comments, .post-date  {
+    color: #fff;
+}
+
+/* TESTIMONIALS SLIDER */
+
+.flex-control-paging li a:hover, .flex-control-paging li a.flex-active {
+    border: 2px solid #62b7a4;
+    background-color: transparent;
+}
+
+.testimonials-paralax h4 {
+    color: #fff;
+}
+
+/* TECHNICAL SKILLS SECTION */
+
+.l-skills-section {
+    /*background-color: #1abc9c;*/
+}
+
+.l-skills-section h1 , .l-skills-section p, .l-skills-section h2, .l-skills-section h3, .l-skills-section h4, .l-skills-section h5, .l-skills-section h6 {
+    color: #fff;
+}
+
+.l-skills-section .m-heading-border {
+    background-color: #fff;
+}
+
+
+/* gallery section */
+
+.l-gallery-categories ul li:hover {
+    background-color: #d66969;
+    border: 1px solid #d66969;
+    color: #fff;
+    cursor: pointer;
+}
+
+.l-gallery-section .m-heading-border {
+    background-color: #d66969;
+}
+
+.l-gallery-section {
+    padding-bottom: 0;
+}
+
+.gallery-post h1, .gallery-post h2, .gallery-post h3, .gallery-post h4, .gallery-post h5, .gallery-post h6, .gallery-post p {
+    color: #fff;
+} 
+
+.gallery-post p {
+    font-style: italic;
+}
+
+/* team section */
+
+.l-team-section {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.l-team-section h1, .l-team-section h2, .l-team-section h3, .l-team-section h4, .l-team-section h5, .l-team-section h6, .l-team-section p {
+    color: #fff;
+}
+
+.l-team-section .m-heading-border {
+    background-color: #fff;
+}
+
+.member-description {
+    background-color: #fff;
+}
+
+.member-description p {
+    color: #454545;
+}
+
+.team-social-icons a {
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+}
+
+.team-social-icons a:hover {        
+        color: #fff;
+        background-color: #e74c3c;
+}
+
+
+
+/* TWITTER SECTION */
+
+.m-twitter-logo {
+    background-color: #1baf92;
+    color: #fff;
+    border: 2px solid #1baf92;
+}
+
+.m-twitter-logo:hover {
+    background-color: transparent;
+    border: 2px solid #1baf92;
+}
+
+.m-twitter-logo i {
+    color: #fff;
+}
+
+.l-twitter-section a {
+    color: #1abc9c;
+}
+
+.l-contactus-section {
+    background-color: #34495e;
+    color: #fff;
+}
+
+.form-button {
+    background-color: #f36363;
+    border: none;
+    border: 2px solid #f36363;
+    transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+}
+
+.form-button:hover {
+    background-color: transparent;
+}
+
+
+.l-map-section .m-heading-border {
+    background-color: #d66969;
+}
+
+.l-contactus-section h1, .l-contactus-section h2, .l-contactus-section h3, .l-contactus-section h4, .l-contactus-section h5, .l-contactus-section h6 {
+    color: #fff;
+} 
