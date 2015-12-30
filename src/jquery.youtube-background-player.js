@@ -229,6 +229,7 @@
 		onPlayerReady: function(event) {
 			if(this.settings.mute) event.target.mute();
 			event.target.playVideo();
+      jQuery(document).trigger('ytbg:startMovie');
 		},
 		
 		onPlayerStateChange: function(event) {
@@ -236,6 +237,7 @@
 			if(event.data === YT.PlayerState.PLAYING) {
 				if(this.settings.overlay) this.overlay.fadeOut(1500);
 				if(this.settings.ytbgcontrols && !jQuery(this.ytbgcontrols).is(':visible')) this.ytbgcontrols.fadeIn(1500);
+        jQuery(document).trigger('ytbg:startMovie');
 				this.playing = true;
 			}
 			
@@ -243,6 +245,7 @@
 				if(this.playing)
 				{
 					this.playing = false;
+          jQuery(document).trigger('ytbg:endMovie');
 					this.nextVideo();
 				}
 			}
@@ -250,6 +253,7 @@
 		},
 		
 		nextVideo: function(previous) {
+      jQuery(document).trigger('ytbg:endMovie');
 			if(this.settings.overlay) this.overlay.fadeIn(500);
 			//if(this.settings.ytbgcontrols) this.ytbgcontrols.fadeOut(500);
 			
