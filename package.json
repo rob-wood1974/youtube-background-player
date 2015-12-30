@@ -1,0 +1,19 @@
+{
+  "name": "youtube-background-player",
+  "version": "1.0.0",
+  "description": "Custom Youtube playlists for your website background.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rob-wood1974/youtube-background-player.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Rob Wood <rob@virtualstyle.us> (http://www.rob-wood.met)",
+  "license": "MIT"
+}
