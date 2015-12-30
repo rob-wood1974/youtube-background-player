@@ -1,2 +1,4 @@
 # youtube-background-player
-Custome Youtube playlists for you website background.
+Custom Youtube playlists for your website background.
+
+Demo: http://rob-wood.net/youtube-background-player/demo/
