@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-body{pointer-events: none;}
+iframe{pointer-events:none;}
 
 #ytbgcontroldiv {
 	width: 100%;
