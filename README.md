@@ -8,6 +8,7 @@ Include jQuery and youtube-background-player:
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="../src/jquery.youtube-background-player.js"></script>
+```
 
 ```javascript
 //List of objects with video-specific values
@@ -68,3 +69,4 @@ var options = {
 $(function() {
 	$('body').YoutubeBackgroundPlayer(options);
 });
+```
