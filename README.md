@@ -1,14 +1,15 @@
 # youtube-background-player
 Custom Youtube playlists for your website background.
 
-{Live demo](http://rob-wood.net/youtube-background-player/demo/)
+[Live demo](http://rob-wood.net/youtube-background-player/demo/)
 
 Include jQuery and youtube-background-player:
 
-```
+```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="../src/jquery.youtube-background-player.js"></script>
 
+```javascript
 //List of objects with video-specific values
 var videos = [	
 	{video:'A9Xru1ReRwc',start:3,end:8}, //brain
