@@ -77,6 +77,8 @@
 		this._name = pluginName;
 		
 		this.overlay = jQuery('<div id="ytbgoverlay" />');
+    this.controldiv = jQuery('<div id="ytbgcontroldiv"></div>');
+    jQuery('body').prepend(this.controldiv);
 		this.playing = false;
 		this.player = null;
 		this.currentvideo = this.settings.currentvideo;
@@ -96,7 +98,7 @@
 			// you can add more functions like the one below and
 			// call them like so: this.yourOtherFunction(this.element, this.settings).
 			
-			if(this.settings.overlay) jQuery('#ytbg').append(this.overlay);
+			if(this.settings.overlay) jQuery('#ytbgcontroldiv').append(this.overlay);
       
       //jQuery('#ytbg').width(jQuery(window).width() + 14);
       //jQuery('#ytbg').height(jQuery(window).height() + 14);
@@ -141,11 +143,10 @@
 			tag.src = "https://www.youtube.com/iframe_api";
 			var firstScriptTag = document.getElementsByTagName('script')[0];
 			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-			
+			var target = jQuery('body');
 			//Blatant theft from https://github.com/okfocus/okvideo, to achieve fullscreen background, expand video to push ads offscreen
 			var BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw%3D%3D";
-			var target =jQuery('body');
-			var position = target[0] === jQuery('body')[0] ? 'fixed' : 'absolute';		
+			var position = 'fixed';		
 			target.css({position: 'relative'});		
 			var zIndex = 9999999999;
 			var mask = jQuery('<div id="ytbgplayer-mask" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;"></div>');
@@ -161,7 +162,7 @@
 				this.ytbgcontrols.append(jQuery('<img src="http://wiki.famfamfam.googlecode.com/hg/images/control_play_blue.png">'));
 				this.ytbgcontrols.append(jQuery('<img src="http://wiki.famfamfam.googlecode.com/hg/images/control_pause_blue.png">'));
 				this.ytbgcontrols.append(jQuery('<img src="http://wiki.famfamfam.googlecode.com/hg/images/control_fastforward_blue.png">'));
-				jQuery('#ytbg').append(this.ytbgcontrols);
+				jQuery('body').append(this.ytbgcontrols);
         
         //this.ytbgcontrols.show();
 				
@@ -212,6 +213,7 @@
 		},
 		
 		onYouTubeIframeAPIReady: function() {
+      jQuery(document).trigger('ytbg:onYouTubeIframeAPIReady');
 			this.player = new YT.Player('ytbgplayer', {
 				height: '390',
 				width: '640',
@@ -227,7 +229,6 @@
 		onPlayerReady: function(event) {
 			if(this.settings.mute) event.target.mute();
 			event.target.playVideo();
-      console.log(jQuery('#ytbg').css('zIndex'));
 		},
 		
 		onPlayerStateChange: function(event) {
@@ -235,8 +236,6 @@
 			if(event.data === YT.PlayerState.PLAYING) {
 				if(this.settings.overlay) this.overlay.fadeOut(1500);
 				if(this.settings.ytbgcontrols && !jQuery(this.ytbgcontrols).is(':visible')) this.ytbgcontrols.fadeIn(1500);
-        console.log(this.ytbgcontrols);
-        console.log(jQuery('#ytbgcontrols'));
 				this.playing = true;
 			}
 			
