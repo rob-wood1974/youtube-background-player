@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+body{pointer-events: none;}
+
 #ytbgcontroldiv {
 	width: 100%;
 	height: 100%;
