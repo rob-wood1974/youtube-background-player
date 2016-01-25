@@ -2,13 +2,13 @@
 
 iframe{pointer-events:none;}
 
-#ytbgcontroldiv {
+#ytbgcontentdiv {
 	width: 100%;
 	height: 100%;
 	margin: 0;
 	padding: 0;
   position:relative;
-  z-index:2147483647;
+  z-index:2100000001;
   /*border:1px solid #f00;*/
   background:transparent;
 }
@@ -20,19 +20,19 @@ iframe{pointer-events:none;}
 	width: 100%;
 	height: 100%;
 	background: #333;
-	z-index: 2147483647;
+	z-index: 2100000002;
 	pointer-events: none;
 }
 
 #ytbgcontrols {
-	width: 80px;
+	width: 100px;
 	height: 20px;
 	padding: 0;
 	margin: 0;
 	position: absolute;
 	top: 0;
 	right: 0;
-	z-index: 2147483647;
+	z-index: 2100000003;
 	display: none;
 }
 

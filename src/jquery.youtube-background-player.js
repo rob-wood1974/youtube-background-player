@@ -1,6 +1,17 @@
+// the semi-colon before function invocation is a safety net against concatenated
+// scripts and/or other plugins which may not be closed properly.
 ;(function ( $, window, document, undefined ) {
 
 	"use strict";
+
+	// undefined is used here as the undefined global variable in ECMAScript 3 is
+	// mutable (ie. it can be changed by someone else). undefined isn't really being
+	// passed in so we can ensure the value of it is truly undefined. In ES5, undefined
+	// can no longer be modified.
+
+	// window and document are passed through as local variable rather than global
+	// as this (slightly) quickens the resolution process and can be more efficiently
+	// minified (especially when both are regularly referenced in your plugin).
   
   //Some JSHint directives
   /* globals YT, onPlayerStateChange, onPlayerReady */
@@ -66,7 +77,7 @@
 		this._name = pluginName;
 		
 		this.overlay = jQuery('<div id="ytbgoverlay" />');
-    this.controldiv = jQuery('<div id="ytbgcontroldiv"></div>');
+    this.controldiv = jQuery('<div id="ytbgcontentdiv"></div>');
     jQuery('body').prepend(this.controldiv);
 		this.playing = false;
 		this.player = null;
@@ -77,12 +88,23 @@
 		this.init();
 	}
 
+	// Avoid Plugin.prototype conflicts
 	$.extend(YoutubeBackgroundPlayer.prototype, {
 		init: function () {
+			// Place initialization logic here
+			// You already have access to the DOM element and
+			// the options via the instance, e.g. this.element
+			// and this.settings
+			// you can add more functions like the one below and
+			// call them like so: this.yourOtherFunction(this.element, this.settings).
 			
 			if(this.settings.overlay) {
-        jQuery('#ytbgcontroldiv').append(this.overlay);
+        jQuery('#ytbgcontentdiv').append(this.overlay);
       }
+      
+      //jQuery('#ytbg').width(jQuery(window).width() + 14);
+      //jQuery('#ytbg').height(jQuery(window).height() + 14);
+			//this.overlay.remove();
       
 			//Create our custom events to be fired by events from YouTube API
 			var _this = this; //need a context closure
@@ -128,11 +150,11 @@
 			var BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw%3D%3D";
 			var position = 'fixed';		
 			target.css({position: 'relative'});		
-			var zIndex = 9999999999;
+			var zIndex = 2100000000;
 			var mask = jQuery('<div id="ytbgplayer-mask" style="position:' + position + ';left:0;top:0;overflow:hidden;z-index:-998;height:100%;width:100%;"></div>');
 			var overlap = this.settings.expansionpercent/2;
 			var size = 100 + this.settings.expansionpercent;
-			target.prepend('<div id="ytbgplayer" style="position:' + position + ';left:-' + overlap + '%;top:-' + overlap + '%;overflow:hidden;z-index:' + zIndex + ';height:' + size + '%;width:' + size + '%;"></div>');		
+			target.append('<div id="ytbgplayer" style="position:' + position + ';left:-' + overlap + '%;top:-' + overlap + '%;overflow:hidden;z-index:' + zIndex + ';height:' + size + '%;width:' + size + '%;"></div>');		
 			mask.css("background-image", "url(" + BLANK_GIF + ")");
 			
 			//Load up the player controls, if required
@@ -146,9 +168,10 @@
         
         //this.ytbgcontrols.show();
 				
-				jQuery('#ytbgcontrols img').hover(function(){
-						jQuery(this).prop('src', jQuery(this).prop('src').replace('_blue', ''));
-					},function(){
+				jQuery('#ytbgcontrols img').on('mouseenter', function(){
+					jQuery(this).prop('src', jQuery(this).prop('src').replace('_blue', ''));
+				});
+        jQuery('#ytbgcontrols img').on('mouseleave', function(){
 						jQuery(this).prop('src', jQuery(this).prop('src').replace('.png', '_blue.png'));
 				});
 				
@@ -185,6 +208,16 @@
 			}
 			
 		},
+    
+    play: function()
+    {
+      this.player.playVideo();
+    },
+    
+    pause: function()
+    {
+      this.player.pauseVideo();
+    },
 		
 		preloadImages: function () {
 			jQuery.each(this.images, function(k, v){
@@ -207,33 +240,30 @@
 		},
 		
 		onPlayerReady: function(event) {
-      
 			if(this.settings.mute) {
         event.target.mute();
       }
 			event.target.playVideo();
-      
+      jQuery(document).trigger('ytbg:startMovie');
 		},
 		
 		onPlayerStateChange: function(event) {
 			
 			if(event.data === YT.PlayerState.PLAYING) {
-        
 				if(this.settings.overlay) {
           this.overlay.fadeOut(1500);
         }
-        
 				if(this.settings.ytbgcontrols && !jQuery(this.ytbgcontrols).is(':visible')) {
           this.ytbgcontrols.fadeIn(1500);
         }
-        
+        jQuery(document).trigger('ytbg:startMovie');
 				this.playing = true;
 			}
 			
 			if(event.data === YT.PlayerState.ENDED) {
-				if(this.playing)
-				{
+				if(this.playing) {
 					this.playing = false;
+          jQuery(document).trigger('ytbg:endMovie');
 					this.nextVideo();
 				}
 			}
@@ -241,6 +271,7 @@
 		},
 		
 		nextVideo: function(previous) {
+      jQuery(document).trigger('ytbg:endMovie');
 			if(this.settings.overlay) {
         this.overlay.fadeIn(500);
       }
