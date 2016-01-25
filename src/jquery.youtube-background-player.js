@@ -1,17 +1,6 @@
-// the semi-colon before function invocation is a safety net against concatenated
-// scripts and/or other plugins which may not be closed properly.
 ;(function ( $, window, document, undefined ) {
 
 	"use strict";
-
-	// undefined is used here as the undefined global variable in ECMAScript 3 is
-	// mutable (ie. it can be changed by someone else). undefined isn't really being
-	// passed in so we can ensure the value of it is truly undefined. In ES5, undefined
-	// can no longer be modified.
-
-	// window and document are passed through as local variable rather than global
-	// as this (slightly) quickens the resolution process and can be more efficiently
-	// minified (especially when both are regularly referenced in your plugin).
   
   //Some JSHint directives
   /* globals YT, onPlayerStateChange, onPlayerReady */
@@ -88,21 +77,12 @@
 		this.init();
 	}
 
-	// Avoid Plugin.prototype conflicts
 	$.extend(YoutubeBackgroundPlayer.prototype, {
 		init: function () {
-			// Place initialization logic here
-			// You already have access to the DOM element and
-			// the options via the instance, e.g. this.element
-			// and this.settings
-			// you can add more functions like the one below and
-			// call them like so: this.yourOtherFunction(this.element, this.settings).
 			
-			if(this.settings.overlay) jQuery('#ytbgcontroldiv').append(this.overlay);
-      
-      //jQuery('#ytbg').width(jQuery(window).width() + 14);
-      //jQuery('#ytbg').height(jQuery(window).height() + 14);
-			//this.overlay.remove();
+			if(this.settings.overlay) {
+        jQuery('#ytbgcontroldiv').append(this.overlay);
+      }
       
 			//Create our custom events to be fired by events from YouTube API
 			var _this = this; //need a context closure
@@ -227,17 +207,26 @@
 		},
 		
 		onPlayerReady: function(event) {
-			if(this.settings.mute) event.target.mute();
+      
+			if(this.settings.mute) {
+        event.target.mute();
+      }
 			event.target.playVideo();
-      jQuery(document).trigger('ytbg:startMovie');
+      
 		},
 		
 		onPlayerStateChange: function(event) {
 			
 			if(event.data === YT.PlayerState.PLAYING) {
-				if(this.settings.overlay) this.overlay.fadeOut(1500);
-				if(this.settings.ytbgcontrols && !jQuery(this.ytbgcontrols).is(':visible')) this.ytbgcontrols.fadeIn(1500);
-        jQuery(document).trigger('ytbg:startMovie');
+        
+				if(this.settings.overlay) {
+          this.overlay.fadeOut(1500);
+        }
+        
+				if(this.settings.ytbgcontrols && !jQuery(this.ytbgcontrols).is(':visible')) {
+          this.ytbgcontrols.fadeIn(1500);
+        }
+        
 				this.playing = true;
 			}
 			
@@ -245,7 +234,6 @@
 				if(this.playing)
 				{
 					this.playing = false;
-          jQuery(document).trigger('ytbg:endMovie');
 					this.nextVideo();
 				}
 			}
@@ -253,17 +241,21 @@
 		},
 		
 		nextVideo: function(previous) {
-      jQuery(document).trigger('ytbg:endMovie');
-			if(this.settings.overlay) this.overlay.fadeIn(500);
-			//if(this.settings.ytbgcontrols) this.ytbgcontrols.fadeOut(500);
+			if(this.settings.overlay) {
+        this.overlay.fadeIn(500);
+      }
 			
 			if(previous) {
 				this.currentvideo--;
-				if(this.currentvideo < 0) this.currentvideo = this.videos.length -1;
+				if(this.currentvideo < 0) {
+          this.currentvideo = this.videos.length -1;
+        }
 			}
 			else {
 				this.currentvideo++;
-				if(this.currentvideo >= this.videos.length) this.currentvideo = 0;
+				if(this.currentvideo >= this.videos.length) {
+          this.currentvideo = 0;
+        }
 			}
 			
 			this.player.loadVideoById(this.videos[this.currentvideo]);
@@ -271,8 +263,6 @@
 		
 	});
 
-	// A really lightweight plugin wrapper around the constructor,
-	// preventing against multiple instantiations
 	$.fn[ pluginName ] = function ( options ) {
 		return this.each(function() {
 			if ( !$.data( this, "plugin_" + pluginName ) ) {

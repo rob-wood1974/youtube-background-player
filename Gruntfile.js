@@ -7,14 +7,14 @@ module.exports = function(grunt) {
 
 		// Banner definitions
 		meta: {
-			banner: "/*\n" +
-				" *  <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
-				" *  <%= pkg.description %>\n" +
-				" *  <%= pkg.homepage %>\n" +
-				" *\n" +
-				" *  Made by <%= pkg.author.name %>\n" +
-				" *  Under <%= pkg.license %> License\n" +
-				" */\n"
+			banner: "/*██████████████████████████████████████████████████████████████████████████████\n" +
+				" █  <%= pkg.author.company %>\n" +
+				" █  <%= pkg.title || pkg.name %> - v<%= pkg.version %>\n" +
+				" █  <%= pkg.description %>\n" +
+				" █  <%= pkg.homepage %>\n" +
+				" █  Made by <%= pkg.author.name %>\n" +
+				" █  Under <%= pkg.license %> License\n" +
+				" █████████████████████████████████████████████████████████████████████████████*/\n"
 		},
 
 		// Concat definitions
@@ -23,14 +23,14 @@ module.exports = function(grunt) {
 				banner: "<%= meta.banner %>"
 			},
 			dist: {
-				src: ["src/jquery.youtube-background-player.js"],
+				src: ["src/*.js"],
 				dest: "dist/jquery.youtube-background-player.js"
 			}
 		},
 
 		// Lint definitions
 		jshint: {
-			files: ["src/jquery.youtube-background-player.js"],
+			files: ["src/*.js"],
 			options: {
 				jshintrc: ".jshintrc"
 			}
