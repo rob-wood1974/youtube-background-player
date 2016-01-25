@@ -1,2 +1,5 @@
 # youtube-background-player
-Custome Youtube playlists for you website background.
+Custom Youtube playlists for your website background.
+
+
+http://www.virtualstyle.us/youtube-background-player/demo/
