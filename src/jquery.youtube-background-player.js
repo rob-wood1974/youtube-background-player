@@ -80,6 +80,7 @@
     this.controldiv = jQuery('<div id="ytbgcontentdiv"></div>');
     jQuery('body').prepend(this.controldiv);
 		this.playing = false;
+		this.ready = false;
 		this.player = null;
 		this.currentvideo = this.settings.currentvideo;
 		this.videos = this.settings.videos;
@@ -243,6 +244,7 @@
 			if(this.settings.mute) {
         event.target.mute();
       }
+      this.ready = true;
 			event.target.playVideo();
       jQuery(document).trigger('ytbg:startMovie');
 		},
